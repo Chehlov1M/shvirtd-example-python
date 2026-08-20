@@ -82,6 +82,11 @@ def get_client_ip(x_real_ip: Optional[str] = Header(None)):
     return x_real_ip
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok", "service": "web", "build": "multistage"}
+
+
 # --- 5. Основной эндпоинт ---
 @app.get("/")
 def index(request: Request, ip_address: Optional[str] = Depends(get_client_ip)):
